@@ -12,8 +12,8 @@
     
     
     <bean id = "car" class ="com.codedecode.SpringDemo.Demos.Car">
-    	<property name = "engine" ref = "engine"/> <!--setter injection  -->
-    	
+    	<!-- <property name = "engine" ref = "engine"/> --> <!--setter injection  -->
+    	<constructor-arg ref="engine"/>  <!-- costructor injection -->
     </bean>
     
     <bean id = "engine" class ="com.codedecode.SpringDemo.Demos.Engine">
