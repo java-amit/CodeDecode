@@ -4,10 +4,19 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="
            http://www.springframework.org/schema/beans
-           classpath:/org/springframework/beans/factory/xml/spring-beans.xsd
+           http://www.springframework.org/schema/beans/spring-beans.xsd
            http://www.springframework.org/schema/context
-           classpath:/org/springframework/context/config/spring-context.xsd">
+           http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!-- Other bean definitions -->
+    
+    
+    <bean id = "car" class ="com.codedecode.SpringDemo.Demos.Car">
+    	<property name = "engine" ref = "engine"/> <!--setter injection  -->
+    	
+    </bean>
+    
+    <bean id = "engine" class ="com.codedecode.SpringDemo.Demos.Engine">
+    </bean>
 
 </beans>
