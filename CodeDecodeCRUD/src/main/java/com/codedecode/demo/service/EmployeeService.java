@@ -25,6 +25,13 @@ public class EmployeeService implements EmployeeServiceInterface{
 		return crudRepo.findAll();
 		
 	}
+
+	@Override
+	public Employee getEmpById(Long empidL) {
+		//return crudRepo.findById(empidL).get();   //findById(id) returns Optional Object so call get() or orElseThrow() method with it.
+		return crudRepo.findById(empidL).orElseThrow(() -> new RuntimeException("Employee not found with id: " + empidL));
+
+	}
 	
 	
 	
