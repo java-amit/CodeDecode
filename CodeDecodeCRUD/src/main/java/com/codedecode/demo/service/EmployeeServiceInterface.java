@@ -11,6 +11,8 @@ public interface EmployeeServiceInterface {
 	public List<Employee> getAllEmployees();
 
 	public Employee getEmpById(Long empidL);
+
+	public void deleteEmpById(Long empidL);
 	
 	
 }

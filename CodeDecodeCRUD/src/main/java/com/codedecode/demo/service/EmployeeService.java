@@ -32,6 +32,11 @@ public class EmployeeService implements EmployeeServiceInterface{
 		return crudRepo.findById(empidL).orElseThrow(() -> new RuntimeException("Employee not found with id: " + empidL));
 
 	}
+
+	@Override
+	public void deleteEmpById(Long empidL) {
+		crudRepo.deleteById(empidL);
+	}
 	
 	
 	
