@@ -51,6 +51,10 @@ public class EmployeeController {
 		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
 	 }
 	 
-	 
+	 @PutMapping("/update")
+		public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee){
+			Employee employeesaved = employeeServiceInterface.addEmployee(employee);
+			return new ResponseEntity<Employee>(employeesaved,HttpStatus.CREATED);
+		}
 	 
 }
