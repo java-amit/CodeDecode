@@ -1,5 +1,7 @@
 package com.codedecode.demo.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,12 @@ public class EmployeeService implements EmployeeServiceInterface{
 	public Employee addEmployee(Employee employee) {
 		Employee saveEmployee = crudRepo.save(employee);
 		return saveEmployee;
+	}
+
+	@Override
+	public List<Employee> getAllEmployees() {
+		return crudRepo.findAll();
+		
 	}
 	
 	

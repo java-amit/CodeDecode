@@ -28,6 +28,11 @@ public class EmployeeController {
 		return new ResponseEntity<Employee>(employeesaved,HttpStatus.CREATED);
 	}
 	
-	
+	@GetMapping("/all")
+	public ResponseEntity<List<Employee>> getAllEmployees(){
+		
+		List<Employee> listOfAllEmps = employeeServiceInterface.getAllEmployees();
+		return new ResponseEntity<List<Employee>>(listOfAllEmps, HttpStatus.OK);
+	}
 
 }
