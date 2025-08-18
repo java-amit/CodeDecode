@@ -38,19 +38,12 @@ public class EmployeeService implements EmployeeServiceInterface{
 		if(empList.isEmpty())
 			throw new BusinessException("604", "Hey List is completely empty, we have nothing to return");
 		return empList;
-		
 	}
 
 	@Override
 	public Employee getEmpById(Long empidL) {
-		try {
 		return crudRepo.findById(empidL).get();   //findById(id) returns Optional Object so call get() or orElseThrow() method with it.
 		//return crudRepo.findById(empidL).orElseThrow(() -> new RuntimeException("Employee not found with id: " + empidL));
-		}catch (IllegalArgumentException e) {
-			throw new BusinessException("606","given Employee Id is null, please send some id to be searched"+e.getMessage());
-		}catch (NoSuchElementException e) {
-			throw new BusinessException("607","given employee id does not exists in DB"+e.getMessage());
-		}	
 	}
 
 	@Override
