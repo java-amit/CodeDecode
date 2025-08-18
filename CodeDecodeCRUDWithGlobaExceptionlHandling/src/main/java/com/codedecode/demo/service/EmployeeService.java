@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.codedecode.demo.custom.exception.BusinessException;
+import com.codedecode.demo.custom.exception.EmptyInputException;
 import com.codedecode.demo.entity.Employee;
 import com.codedecode.demo.repo.EmployeeCrudRepo;
 
@@ -20,16 +21,10 @@ public class EmployeeService implements EmployeeServiceInterface{
 	public Employee addEmployee(Employee employee) {
 		
 		if(employee.getName().isEmpty() || employee.getName().length() == 0) {
-			throw new BusinessException("601", "Please send proper name,Employee name is null");
+			throw new EmptyInputException("601", "Input Field are empty");
 		}
-		try {
 			Employee saveEmployee = crudRepo.save(employee);
 			return saveEmployee;
-		}catch (IllegalArgumentException e) {
-			throw new BusinessException("602","given Employee is null"+e.getMessage());
-		}catch (Exception e) {
-			throw new BusinessException("603","Something went wrong in service layer while saving the employee"+e.getMessage());
-		}
 	}
 
 	@Override

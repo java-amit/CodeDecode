@@ -23,29 +23,13 @@ import com.codedecode.demo.service.EmployeeServiceInterface;
 @RequestMapping("/code")
 public class EmployeeController {
 
-    private final ControllerException controllerException;
-	
 	@Autowired
 	private EmployeeServiceInterface employeeServiceInterface;
 
-
-    EmployeeController(ControllerException controllerException) {
-        this.controllerException = controllerException;
-    }  ;
-	
-	
 	@PostMapping("/save")
 	public ResponseEntity<?> addEmployee(@RequestBody Employee employee){
-		try {
 		Employee employeesaved = employeeServiceInterface.addEmployee(employee);
 		return new ResponseEntity<Employee>(employeesaved,HttpStatus.CREATED);
-		}catch (BusinessException e) {
-			ControllerException ce = new ControllerException(e.getErrorCode(), e.getErrorMessage());
-			return new ResponseEntity<ControllerException>(ce,HttpStatus.BAD_REQUEST);
-		}catch (Exception e) {
-			ControllerException ce = new ControllerException("611", "Something went wrong in controller");
-			return new ResponseEntity<ControllerException>(ce,HttpStatus.BAD_REQUEST);
-		}
 	}
 	
 	@GetMapping("/all")
@@ -56,16 +40,8 @@ public class EmployeeController {
 	}
 	@GetMapping("/emp/{empid}")
 	public ResponseEntity<?> getEmpById(@PathVariable("empid") Long empidL){
-		try {
 			Employee empRetrieved = employeeServiceInterface.getEmpById(empidL);
 			return new ResponseEntity<Employee>(empRetrieved, HttpStatus.OK);
-		}catch (BusinessException e) {
-			ControllerException ce = new ControllerException(e.getErrorCode(), e.getErrorMessage());
-			return new ResponseEntity<ControllerException>(ce,HttpStatus.BAD_REQUEST);
-		}catch (Exception e) {
-			ControllerException ce = new ControllerException("612", "Something went wrong in controller");
-			return new ResponseEntity<ControllerException>(ce,HttpStatus.BAD_REQUEST);
-		}	
 	}
 	
 	 @DeleteMapping("/delete/{empid}")
