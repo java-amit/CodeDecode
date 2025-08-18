@@ -14,21 +14,38 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.codedecode.demo.custom.exception.BusinessException;
+import com.codedecode.demo.custom.exception.ControllerException;
 import com.codedecode.demo.entity.Employee;
 import com.codedecode.demo.service.EmployeeServiceInterface;
 
 @RestController
 @RequestMapping("/code")
 public class EmployeeController {
+
+    private final ControllerException controllerException;
 	
 	@Autowired
-	private EmployeeServiceInterface employeeServiceInterface;  ;
+	private EmployeeServiceInterface employeeServiceInterface;
+
+
+    EmployeeController(ControllerException controllerException) {
+        this.controllerException = controllerException;
+    }  ;
 	
 	
 	@PostMapping("/save")
-	public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee){
+	public ResponseEntity<?> addEmployee(@RequestBody Employee employee){
+		try {
 		Employee employeesaved = employeeServiceInterface.addEmployee(employee);
 		return new ResponseEntity<Employee>(employeesaved,HttpStatus.CREATED);
+		}catch (BusinessException e) {
+			ControllerException ce = new ControllerException(e.getErrorCode(), e.getErrorMessage());
+			return new ResponseEntity<ControllerException>(ce,HttpStatus.BAD_REQUEST);
+		}catch (Exception e) {
+			ControllerException ce = new ControllerException("611", "Something went wrong in controller");
+			return new ResponseEntity<ControllerException>(ce,HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 	@GetMapping("/all")
@@ -38,10 +55,17 @@ public class EmployeeController {
 		return new ResponseEntity<List<Employee>>(listOfAllEmps, HttpStatus.OK);
 	}
 	@GetMapping("/emp/{empid}")
-	public ResponseEntity<Employee> getEmpById(@PathVariable("empid") Long empidL){
-		
-		Employee empRetrieved = employeeServiceInterface.getEmpById(empidL);
-		return new ResponseEntity<Employee>(empRetrieved, HttpStatus.OK);
+	public ResponseEntity<?> getEmpById(@PathVariable("empid") Long empidL){
+		try {
+			Employee empRetrieved = employeeServiceInterface.getEmpById(empidL);
+			return new ResponseEntity<Employee>(empRetrieved, HttpStatus.OK);
+		}catch (BusinessException e) {
+			ControllerException ce = new ControllerException(e.getErrorCode(), e.getErrorMessage());
+			return new ResponseEntity<ControllerException>(ce,HttpStatus.BAD_REQUEST);
+		}catch (Exception e) {
+			ControllerException ce = new ControllerException("612", "Something went wrong in controller");
+			return new ResponseEntity<ControllerException>(ce,HttpStatus.BAD_REQUEST);
+		}	
 	}
 	
 	 @DeleteMapping("/delete/{empid}")
@@ -56,5 +80,4 @@ public class EmployeeController {
 			Employee employeesaved = employeeServiceInterface.addEmployee(employee);
 			return new ResponseEntity<Employee>(employeesaved,HttpStatus.CREATED);
 		}
-	 
 }
