@@ -6,11 +6,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.codedecode.demo.custom.exception.EmptyInputException;
 
 @ControllerAdvice
-public class MyControllerAdvice {
+public class MyControllerAdvice extends ResponseEntityExceptionHandler{
 
 	@ExceptionHandler(EmptyInputException.class) // Giving a class as an argument inside an annotation is called a Class
 													// literal (or class reference
