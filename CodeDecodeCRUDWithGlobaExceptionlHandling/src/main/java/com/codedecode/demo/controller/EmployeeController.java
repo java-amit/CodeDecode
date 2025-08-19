@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.codedecode.demo.custom.exception.BusinessException;
-import com.codedecode.demo.custom.exception.ControllerException;
 import com.codedecode.demo.entity.Employee;
 import com.codedecode.demo.service.EmployeeServiceInterface;
 
@@ -56,4 +54,19 @@ public class EmployeeController {
 			Employee employeesaved = employeeServiceInterface.addEmployee(employee);
 			return new ResponseEntity<Employee>(employeesaved,HttpStatus.CREATED);
 		}
+	 
+	 @GetMapping("/")
+	 public String home() {
+		 return "<h1>welcome</h1>";
+	 }
+	 
+	 @GetMapping("/user")
+	 public String user() {
+		 return "<h1>hi user</h1>";
+	 }
+	 
+	 @GetMapping("/admin")
+	 public String admin() {
+		 return "<h1>hi admin</h1>";
+	 }
 }
