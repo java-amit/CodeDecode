@@ -1,0 +1,9 @@
+The Strategy design pattern is particularly useful in situations like
+ sorting data with different algorithms,
+  processing payments with various methods,
+   or handling notifications through diverse channels
+    (e.g., email, SMS, push notifications).
+    
+The Strategy design pattern is used where a particular task can be 
+performed in multiple ways, and the specific method needs 
+to be chosen dynamically at runtime.
