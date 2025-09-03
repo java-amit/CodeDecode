@@ -18,7 +18,9 @@ public class EmployeeService {
 		return employeeRepo.findAll();
 	}
 
-	public Employee addEmployee(Employee e) {
+	public Employee addEmployee(Employee e) throws Exception {
+		if(e.getName().length()>5)
+			throw new Exception("Sorry please reduce size of your names");
 		return employeeRepo.save(e);
 	}
 

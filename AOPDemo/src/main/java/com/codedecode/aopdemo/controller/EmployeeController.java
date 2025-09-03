@@ -27,7 +27,7 @@ public class EmployeeController {
 	}
 	
 	@PostMapping("/add")
-	public ResponseEntity<?> addEmployee(@RequestBody Employee e){
+	public ResponseEntity<?> addEmployee(@RequestBody Employee e) throws Exception{
 		return new ResponseEntity<Employee>(employeeService.addEmployee(e), HttpStatus.OK);
 	}
 }
