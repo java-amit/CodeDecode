@@ -49,14 +49,14 @@ public class EmployeeAspect {
 	}
 	
 	@Around(value = "execution(* com.codedecode.aopdemo.service.EmployeeService.addEmployee(..))")
-	public Employee aroundAdviceForAddEmpService(ProceedingJoinPoint  joinPoint) {
+	public Employee aroundAdviceForAddEmpService(ProceedingJoinPoint joinPoint) {
 		System.out.println("Inside Around Advice in Aspect: Business logic to save an employee started at " + new Date());
 		try {
 			Employee[] empArr = new Employee[1];
 			Employee dummyEmp = new Employee();
 			dummyEmp.setName("Dummy");
 			empArr[0] = dummyEmp;
-			Employee employee =  (Employee)joinPoint.proceed();
+			Employee employee = (Employee)joinPoint.proceed();
 			return employee;
 		} catch (Throwable e) {
 			System.out.println("Inside Around Advice in Aspect: Business logic to save an employee failed terribly " + e.getMessage());
