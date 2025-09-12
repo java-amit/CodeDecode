@@ -2,6 +2,9 @@ package com.codedecode.SBValidationMapperDemo.DTO;
 
 import java.util.Date;
 
+import com.codedecode.SBValidationMapperDemo.UpdateValidationGroup;
+import com.codedecode.SBValidationMapperDemo.validators.UniqueEmailValidator;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
@@ -28,6 +31,7 @@ public class EmployeeDTO {
 	
 	@Email
 	@NotBlank(message = "Email should not be blank")
+	@UniqueEmailValidator(message = "Email must be Unique", groups = {UpdateValidationGroup.class})
 	private String emailAddress;
 	
 	private int projectId;
